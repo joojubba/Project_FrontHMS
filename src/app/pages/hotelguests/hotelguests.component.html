@@ -1,0 +1,151 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5/dist/lux/bootstrap.min.css">
+<app-navbar></app-navbar>
+
+<table class="table table-hover">
+  <tbody>
+    <tr class="table-active">
+      <th scope="row">Hóspedes</th>
+    </tr>
+    </tbody>
+</table>
+
+<div class="btn-show">
+  <button class="btn-search" (click)="toggleSearch()">
+    <img src="assets/icons/search.png" alt="hotelguest icon">Pesquisar Hóspede
+  </button>
+  <button class="btn-add" (click)="toggleAdd()">
+    <img src="assets/icons/add-guest.png" alt="room icon">Adicionar Hóspede
+  </button>
+
+
+
+  <div *ngIf="showAdd">
+
+  <div class="card add-car custom-size">
+    <h5 class="card-header">Cadastro de Hóspedes</h5>
+    <div class="card-body">
+        <form id="add-form" (ngSubmit)="f.form.valid && saveHotelGuest(f)" #f="ngForm" novalidate>
+          <div class="form-group">
+              <label for="model">Nome</label>
+              <input type="text" [(ngModel)]="hotelguest.hotelGuestName" id="hotelGuestName" name="hotelGuestName" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+              <label for="model">Identificação</label>
+              <input type="text" [(ngModel)]="hotelguest.hotelGuestIdentification" id="hotelGuestIdentification" name="hotelGuestIdentification" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+              <label for="model">Data de Nascimento</label>
+              <input type="date" [(ngModel)]="hotelguest.dateBirthHotelGuest" id="dateBirthHotelGuest" name="dateBirthHotelGuest" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+              <label for="model">Email</label>
+              <input type="email" [(ngModel)]="hotelguest.hotelGuestEmail" id="hotelGuestEmail" name="hotelGuestEmail" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+              <label for="model">Telefone</label>
+              <input type="tel" [(ngModel)]="hotelguest.hotelGuestPhone" id="hotelGuestPhone" name="hotelGuestPhone" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+              <label for="model">Endereço</label>
+              <input type="text" [(ngModel)]="hotelguest.hotelGuestAddress" id="hotelGuestAddress" name="hotelGuestAddress" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+          </div>
+          <button type="submit" class="btn btn-success btn-add-car">Salvar</button>
+          <button type="reset" class="btn btn-dark" (click)="cleanForm(f)">Cancelar</button>
+        </form>
+    </div>
+  </div>
+</div>
+</div>
+      <div *ngIf="showSearch">
+        <div class="container">
+          <div class="card list-hotelguest">
+            <h5 class="card-header">Hóspedes Cadastrados</h5>
+            <div class="card-body">
+              <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Identificação</th>
+                      <th scope="col">Data de Nascimento</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Telefone</th>
+                      <th scope="col">Endereço</th>
+                      <th scope="col">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let hotelguest of hotelguests">
+                      <td>{{hotelguest.hotelGuestId}}</td>
+                      <td>{{hotelguest.hotelGuestName}}</td>
+                      <td>{{hotelguest.hotelGuestIdentification}}</td>
+                      <td>{{hotelguest.dateBirthHotelGuest | date : 'dd/MM/yyyy'}}</td>
+                      <td>{{hotelguest.hotelGuestEmail}}</td>
+                      <td>{{hotelguest.hotelGuestPhone}}</td>
+                      <td>{{hotelguest.hotelGuestAddress}}</td>
+                      <td>
+                        <button type="button" class="btn btn-warning" (click)="editHotelGuest(hotelguest)">Editar  </button>
+                        <button type="button" class="btn btn-danger" (click)="deleteHotelGuest(hotelguest)">Deletar</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+          </div>
+
+  <div class="card add-car">
+    <h5 class="card-header">Atualização do Cadastro de Hóspedes</h5>
+    <div class="card-body">
+        <form id="add-form" (ngSubmit)="f.form.valid && saveHotelGuest(f)" #f="ngForm" novalidate>
+          <div class="form-group">
+              <label for="model">Nome</label>
+              <input type="text" [(ngModel)]="hotelguest.hotelGuestName" id="hotelGuestName" name="hotelGuestName" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+              <label for="model">Identificação</label>
+              <input type="text" [(ngModel)]="hotelguest.hotelGuestIdentification" id="hotelGuestIdentification" name="hotelGuestIdentification" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+              <label for="model">Data de Nascimento</label>
+              <input type="date" [(ngModel)]="hotelguest.dateBirthHotelGuest" id="dateBirthHotelGuest" name="dateBirthHotelGuest" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+              <label for="model">Email</label>
+              <input type="email" [(ngModel)]="hotelguest.hotelGuestEmail" id="hotelGuestEmail" name="hotelGuestEmail" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+              <label for="model">Telefone</label>
+              <input type="tel" [(ngModel)]="hotelguest.hotelGuestPhone" id="hotelGuestPhone" name="hotelGuestPhone" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+              <label for="model">Endereço</label>
+              <input type="text" [(ngModel)]="hotelguest.hotelGuestAddress" id="hotelGuestAddress" name="hotelGuestAddress" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+          </div>
+          <button type="submit" class="btn btn-success btn-add-car">Salvar</button>
+          <button type="reset" class="btn btn-dark" (click)="cleanForm(f)">Cancelar</button>
+        </form>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+

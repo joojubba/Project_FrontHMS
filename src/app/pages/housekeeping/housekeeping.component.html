@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5/dist/lux/bootstrap.min.css">
+<app-navbar></app-navbar>
+
+<table class="table table-hover">
+  <tbody>
+    <tr class="table-active">
+      <th scope="row">Governança</th>
+    </tr>
+    </tbody>
+</table>
+
+<div class="container">
+  <div class="card list-hotelguest">
+    <h5 class="card-header">Quartos Cadastrados</h5>
+    <div class="card-body">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">UH</th>
+              <th scope="col">Disponível</th>
+              <th scope="col">Status</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let room of rooms">
+              <td>{{room.roomNumber}}</td>
+              <td>{{room.roomAvailable}}</td>
+              <td>{{roomStatus [room.status]}}</td>
+              <td>
+                <button type="button" class="btn btn-warning" (click)="editRoom(room)">Editar  </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+
+
+  <div class="card add-car">
+    <h5 class="card-header">Atualização do Status dos Quartos</h5>
+    <div class="card-body">
+        <form id="add-form" (ngSubmit)="f.form.valid && saveRoom(f)" #f="ngForm" novalidate>
+          <div class="form-group">
+              <select [(ngModel)]="room.status" id="status" name="status" #model="ngModel" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+               <option [ngValue]="0">Vacant Clean</option>
+                <option [ngValue]="1">Blocked</option>
+                <option [ngValue]="2">Occupied Clean</option>
+                <option [ngValue]="3">Occupied Dirty</option>
+                <option [ngValue]="4">Vacant Dirty</option>
+                <option [ngValue]="5">NoShow</option>
+                <option [ngValue]="6">Out of Order</option>
+                <option [ngValue]="7">Out Service</option>
+              </select>
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+          </div>
+         <button type="button" class="btn btn-success" (click)="changeStatus(room.roomNumber, room.status)">Salvar</button>
+          <button type="reset" class="btn btn-primary" (click)="cleanForm(f)">Cancelar</button>
+        </form>
+    </div>
+  </div>
+</div>
+

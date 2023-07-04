@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+  margin: 0 auto;
+  background-color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+
+
+}
+
+.btn-show {
+  text-align: center;
+  margin-top: 20px;
+}
+.btn-search, .btn-add {
+  background-color: #e7e7e7;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.btn-search:hover, .btn-add:hover {
+  background-color: #800000;
+}
+.btn-search img {
+  width: 20px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+.btn-add img {
+  width: 20px;
+  vertical-align: middle;
+  margin-right: 8px;
+}

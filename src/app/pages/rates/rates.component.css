@@ -1,0 +1,12 @@
+.card{
+  text-align: justify;
+  max-width: 1200px;
+  margin: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+button {
+
+  font-size: 13px;
+  padding: 5px 10px;
+}

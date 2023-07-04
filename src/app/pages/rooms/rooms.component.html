@@ -1,0 +1,82 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5/dist/lux/bootstrap.min.css">
+<app-navbar></app-navbar>
+
+<table class="table table-hover">
+  <tbody>
+    <tr class="table-active">
+      <th scope="row">Quartos</th>
+    </tr>
+    </tbody>
+</table>
+
+<div class="container">
+  <div class="card list-hotelguest">
+    <h5 class="card-header">Quartos Cadastrados</h5>
+    <div class="card-body">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">UH</th>
+              <th scope="col">Capac</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Disponível</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let room of rooms">
+              <td>{{room.roomId}}</td>
+              <td>{{room.roomNumber}}</td>
+              <td>{{room.roomCapacity}}</td>
+              <td>{{room.roomType}}</td>
+              <td>{{room.roomAvailable}}</td>
+              <td>{{room.roomDescription}}</td>
+              <td>
+                <button type="button" class="btn btn-warning" (click)="editRoom(room)">Editar  </button>
+                <button type="button" class="btn btn-danger" (click)="deleteRoom(room)">Deletar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+
+  <div class="card add-car">
+    <h5 class="card-header">Atualização do Cadastro de Quartos</h5>
+    <div class="card-body">
+        <form id="add-form" (ngSubmit)="f.form.valid && saveRoom(f)" #f="ngForm" novalidate>
+          <div class="form-group">
+              <label for="model">UH</label>
+              <input type="number" [(ngModel)]="room.roomNumber" id="roomNumber" name="roomNumber" #model="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+              <label for="model">Capacidade</label>
+              <input type="number" [(ngModel)]="room.roomCapacity" id="roomCapacity" name="roomCapacity" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+              <label for="model">Tipo</label>
+              <input type="text" [(ngModel)]="room.roomType" id="roomType" name="roomType" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+              <label for="model">Disponível</label>
+              <input type="text" [(ngModel)]="room.roomAvailable" id="roomAvailable" name="roomAvailable" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+              <label for="model">Descrição</label>
+              <input type="text" [(ngModel)]="room.roomDescription" id="roomDescription" name="roomDescription" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+          </div>
+         <button type="submit" class="btn btn-success">Salvar</button>
+          <button type="reset" class="btn btn-primary" (click)="cleanForm(f)">Cancelar</button>
+        </form>
+    </div>
+  </div>
+</div>

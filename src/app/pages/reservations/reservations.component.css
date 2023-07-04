@@ -1,0 +1,33 @@
+
+.container{
+  margin-top: 30px;
+  text-align: justify;
+  max-width: 2000px;
+}
+.card{
+  margin-top: 30px;
+  text-align: justify;
+  max-width: 2000px;
+  margin: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.custom-size {
+  max-width: 1200px;
+}
+.btn.btn {
+
+  font-size: 13px;
+  padding: 5px 10px;
+}
+
+
+textarea {
+  border-radius: 2px;
+  border: 2px solid #777;
+  box-sizing: border-box;
+  font-size: 1.25em;
+  width: 100%;
+  padding: 10px;
+  height: 200px;
+}
