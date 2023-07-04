@@ -48,7 +48,7 @@ Project Hotel Management System 🔻
 
   ⚠️ Atenção:
   - Reservas:
-    Não foi possível implementar a tempo a leitura dos hóspedes, quartos e tarifas relacionadas a reserva cadastrada (funcional no back), também não foi possível fazer o cadastro e atualização de reservas.
+    Não foi possível implementar a tempo a leitura dos hóspedes, quartos e tarifas relacionadas a reserva cadastrada, como também não foi possível fazer o cadastro e atualização de reservas (funcional no back).
 
   ✨Pontos de melhoria:
       - Corrigir os pontos destacados em reserva
