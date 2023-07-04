@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5/dist/lux/bootstrap.min.css">
+<app-navbar></app-navbar>
+
+<table class="table table-hover">
+  <tbody>
+    <tr class="table-active">
+      <th scope="row">Check-Out</th>
+    </tr>
+    </tbody>
+</table>
+
+
+<div class="card add-car">
+  <h5 class="card-header">Check-Out do Quarto</h5>
+  <div class="card-body">
+      <form id="add-form" (ngSubmit)="f.form.valid && saveReservation(f)" #f="ngForm" novalidate>
+        <div class="form-group">
+            <label for="model">Nome do Hóspede</label>
+            <input type="number" [(ngModel)]="room.status" id="status" name="status" #model="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+            <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                <div *ngIf="model.errors">Campo obrigatório!</div>
+            </div>
+            <label for="model">Identificação do Hóspode</label>
+            <input type="number" [(ngModel)]="room.status" id="status" name="status" #model="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+            <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                <div *ngIf="model.errors">Campo obrigatório!</div>
+            </div>
+            <label for="model">ID da Reserva</label>
+            <input type="number" [(ngModel)]="reservation.reservationId" id="status" name="status" #model="ngModel"  class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+            <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                <div *ngIf="model.errors">Campo obrigatório!</div>
+            </div>
+            <label for="model">Número do Quarto</label>
+            <input type="number" [(ngModel)]="room.roomNumber" id="status" name="status" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+            <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                <div *ngIf="model.errors">Campo obrigatório!</div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-success btn-add-car" (click)="saveCheckOut(room.roomNumber);cleanForm(f)">Check-Out</button>
+        <button type="reset" class="btn btn-primary" (click)="cleanForm(f)">Cancelar</button>
+      </form>
+  </div>
+</div>
+

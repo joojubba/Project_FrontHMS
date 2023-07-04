@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5/dist/lux/bootstrap.min.css">
+<app-navbar></app-navbar>
+
+<table class="table table-hover">
+  <tbody>
+    <tr class="table-active">
+      <th scope="row">Tarifas</th>
+    </tr>
+    </tbody>
+</table>
+
+
+<div class="container">
+  <div class="card list-rates">
+    <h5 class="card-header">Tarifas Cadastradas</h5>
+    <div class="card-body">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Id </th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Valor</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rate of rates">
+              <td>{{rate.rateId}}</td>
+              <td>{{rate.rateCode}}</td>
+              <td>{{rate.ratePrice}}</td>
+              <td>{{rate.rateDescription}}</td>
+              <td>
+                <button type="button" class="btn btn-warning" (click)="editRate(rate)">Editar  </button>
+                <button type="button" class="btn btn-danger" (click)="deleteRate(rate)">Deletar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+
+  <div class="card add-car">
+    <h5 class="card-header">Atualização do Cadastro de Hóspedes</h5>
+    <div class="card-body">
+        <form id="add-form" (ngSubmit)="f.form.valid && saveRate(f)" #f="ngForm" novalidate>
+          <div class="form-group">
+              <label for="model">Tipo da Tarifa</label>
+              <input type="text" [(ngModel)]="rate.rateCode" id="rateCode" name="rateCode" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+              <label for="model">Valor</label>
+              <input type="number" [(ngModel)]="rate.ratePrice" id="ratePrice" name="ratePrice" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+              <label for="model">Descrição</label>
+              <input type="text" [(ngModel)]="rate.rateDescription" id="rateDescription" name="rateDescription" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+              <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                  <div *ngIf="model.errors">Campo obrigatório!</div>
+              </div>
+          </div>
+         <button type="submit" class="btn btn-success btn-add-car">Salvar</button>
+          <button type="reset" class="btn btn-dark" (click)="cleanForm(f)">Cancelar</button>
+        </form>
+    </div>
+  </div>
+</div>
+
+
