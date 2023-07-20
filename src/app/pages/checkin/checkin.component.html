@@ -15,22 +15,22 @@
       <form id="add-form" (ngSubmit)="f.form.valid && saveReservation(f)" #f="ngForm" novalidate>
         <div class="form-group">
             <label for="model">Nome do Hóspede</label>
-            <input type="number" [(ngModel)]="room.status" id="status" name="status" #model="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+            <input type="text" [(ngModel)]="reservation.reservationId" id="hotelGuestName" name="hotelGuestName" #model="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
             <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
                 <div *ngIf="model.errors">Campo obrigatório!</div>
             </div>
             <label for="model">Identificação do Hóspode</label>
-            <input type="number" [(ngModel)]="room.status" id="status" name="status" #model="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+            <input type="text" [(ngModel)]="reservation.reservationId" id="hotelGuestIdentification" name="hotelGuestIdentification" #model="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
             <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
                 <div *ngIf="model.errors">Campo obrigatório!</div>
             </div>
             <label for="model">ID da Reserva</label>
-            <input type="number" [(ngModel)]="reservation.reservationId" id="status" name="status" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+            <input type="number" [(ngModel)]="reservation.reservationId" id="reservationId" name="reservationId" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
             <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
                 <div *ngIf="model.errors">Campo obrigatório!</div>
             </div>
             <label for="model">Número do Quarto</label>
-            <input type="number" [(ngModel)]="room.roomNumber" id="status" name="status" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+            <input type="number" [(ngModel)]="room.roomNumber" id="roomNumber" name="roomNumber" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
             <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
                 <div *ngIf="model.errors">Campo obrigatório!</div>
             </div>
