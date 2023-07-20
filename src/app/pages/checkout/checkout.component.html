@@ -16,12 +16,12 @@
       <form id="add-form" (ngSubmit)="f.form.valid && saveReservation(f)" #f="ngForm" novalidate>
         <div class="form-group">
             <label for="model">Nome do Hóspede</label>
-            <input type="text" [(ngModel)]="reservation.reservationId" id="hotelGuestName" name="hotelGuestName" #model="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+            <input type="text" [(ngModel)]="hotelguest.hotelGuestName" id="hotelGuestName" name="hotelGuestName" #model="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
             <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
                 <div *ngIf="model.errors">Campo obrigatório!</div>
             </div>
             <label for="model">Identificação do Hóspode</label>
-            <input type="text"[(ngModel)]="reservation.reservationId" id="hotelGuestName" name="hotelGuestName" #model="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+            <input type="text"[(ngModel)]="hotelguest.hotelGuestId" id="hotelGuestName" name="hotelGuestName" #model="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
             <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
                 <div *ngIf="model.errors">Campo obrigatório!</div>
             </div>

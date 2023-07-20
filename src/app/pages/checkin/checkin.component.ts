@@ -22,13 +22,16 @@ export class CheckinComponent {
   reservation = {} as Reservation;
   reservations: Reservation[] = [];
 
+  hotelguest = {} as HotelGuest;
+  hotelguests: HotelGuest[] = [];
 
-  constructor( private reservationService: ReservationService, private roomService: RoomService) {}
+  constructor( private reservationService: ReservationService, private roomService: RoomService, private hotelguestService: HotelguestService) {}
 
 
   ngOnInit() {
     this.getRooms();
     this.getReservations();
+    this.getHotelGuests();
   }
 
   saveCheckIn(roomNumber: number, reservationId: number) {
@@ -72,6 +75,11 @@ export class CheckinComponent {
       this.reservations = reservations;
       console.log(this.room);
 
+    });
+  }
+  getHotelGuests() {
+    this.hotelguestService.getHotelGuests().subscribe((hotelguests: HotelGuest[]) => {
+      this.hotelguests = hotelguests;
     });
   }
 

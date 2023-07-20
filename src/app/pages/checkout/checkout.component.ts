@@ -5,6 +5,8 @@ import { ReservationService } from 'src/app/services/reservation.service';
 import { Room } from 'src/app/models/Room';
 import { Reservation } from 'src/app/models/Reservation';
 import { NgForm } from '@angular/forms';
+import { HotelguestService } from 'src/app/services/hotelguest.service';
+import { HotelGuest } from 'src/app/models/HotelGuest';
 
 @Component({
   selector: 'app-checkout',
@@ -19,11 +21,15 @@ export class CheckoutComponent {
   reservation = {} as Reservation;
   reservations: Reservation[] = [];
 
-  constructor(private reservationService: ReservationService, private roomService: RoomService) {}
+  hotelguest = {} as HotelGuest;
+  hotelguests: HotelGuest[] = [];
+
+  constructor(private reservationService: ReservationService, private roomService: RoomService, private hotelguestService: HotelguestService) {}
 
   ngOnInit() {
     this.getRooms();
     this.getReservations();
+    this.getHotelGuests();
   }
 
   saveCheckOut(roomNumber: number) {
@@ -67,6 +73,11 @@ export class CheckoutComponent {
       this.reservations = reservations;
       console.log(this.room);
 
+    });
+  }
+  getHotelGuests() {
+    this.hotelguestService.getHotelGuests().subscribe((hotelguests: HotelGuest[]) => {
+      this.hotelguests = hotelguests;
     });
   }
 
