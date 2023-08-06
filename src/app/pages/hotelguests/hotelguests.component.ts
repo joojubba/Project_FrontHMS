@@ -1,7 +1,7 @@
 import { Component, Output } from '@angular/core';
 import { HotelGuest } from 'src/app/models/HotelGuest';
-import { HotelguestService } from 'src/app/services/hotelguest.service';
 import { NgForm } from '@angular/forms';
+import { HotelmanagementService } from 'src/app/services/hotelmanagement.service';
 
 
 @Component({
@@ -17,30 +17,30 @@ export class HotelguestsComponent {
 
   hotelguest = {} as HotelGuest;
   hotelguests: HotelGuest[] = [];
-  constructor(private hotelguestService: HotelguestService) {}
+  constructor( private hotelmanagementService: HotelmanagementService) {}
 
   ngOnInit() {
     this.getHotelGuests();
   }
   saveHotelGuest(form: NgForm) {
     if (this.hotelguest.hotelGuestId !== undefined) {
-      this.hotelguestService.updateHotelGuest(this.hotelguest).subscribe(() => {
+      this.hotelmanagementService.updateHotelGuest(this.hotelguest).subscribe(() => {
         this.cleanForm(form);
       });
     } else {
-      this.hotelguestService.saveHotelGuest(this.hotelguest).subscribe(() => {
+      this.hotelmanagementService.saveHotelGuest(this.hotelguest).subscribe(() => {
         this.cleanForm(form);
       });
     }
   }
   getHotelGuests() {
-    this.hotelguestService.getHotelGuests().subscribe((hotelguests: HotelGuest[]) => {
+    this.hotelmanagementService.getHotelGuests().subscribe((hotelguests: HotelGuest[]) => {
       this.hotelguests = hotelguests;
     });
   }
 
   deleteHotelGuest(hotelguest: HotelGuest) {
-    this.hotelguestService.deleteHotelGuest(hotelguest).subscribe(() => {
+    this.hotelmanagementService.deleteHotelGuest(hotelguest).subscribe(() => {
       this.getHotelGuests();
     });
   }

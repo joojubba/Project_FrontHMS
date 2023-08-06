@@ -1,13 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Reservation, ReservationStatus } from 'src/app/models/Reservation';
-import { ReservationService } from 'src/app/services/reservation.service';
 import { HotelGuest } from 'src/app/models/HotelGuest';
-import { HotelguestService } from 'src/app/services/hotelguest.service';
 import { NgForm } from '@angular/forms';
-import { RateService } from 'src/app/services/rate.service';
 import { Rate } from 'src/app/models/Rate';
 import { Room } from 'src/app/models/Room';
-import { RoomService } from 'src/app/services/room.service';
+import { HotelmanagementService } from 'src/app/services/hotelmanagement.service';
 
 @Component({
   selector: 'app-reservations',
@@ -33,7 +30,7 @@ import { RoomService } from 'src/app/services/room.service';
 
   reservationStatus = ReservationStatus;
 
-  constructor(private hotelguestService: HotelguestService, private reservationService: ReservationService, private rateService: RateService, private roomService: RoomService){}
+  constructor(private hotelmanagementService: HotelmanagementService){}
 
   ngOnInit() {
     this.getHotelGuests();
@@ -42,23 +39,23 @@ import { RoomService } from 'src/app/services/room.service';
 
   saveReservation(form: NgForm) {
     if (this.reservation.reservationId !== undefined) {
-      this.reservationService.updateReservation(this.reservation).subscribe(() => {
+      this.hotelmanagementService.updateReservation(this.reservation).subscribe(() => {
         this.cleanForm(form);
       });
     } else {
-      this.reservationService.saveReservation(this.reservation).subscribe(() => {
+      this.hotelmanagementService.saveReservation(this.reservation).subscribe(() => {
         this.cleanForm(form);
       });
     }
   }
   getReservations() {
-    this.reservationService.getReservations().subscribe((reservations: Reservation[]) => {
+    this.hotelmanagementService.getReservations().subscribe((reservations: Reservation[]) => {
       this.reservations = reservations;
     });
   }
 
   deleteReservation(reservation: Reservation) {
-    this.reservationService.deleteReservation(reservation).subscribe(() => {
+    this.hotelmanagementService.deleteReservation(reservation).subscribe(() => {
       this.getReservations();
     });
   }
@@ -68,7 +65,7 @@ import { RoomService } from 'src/app/services/room.service';
   }
 
   getHotelGuests() {
-    this.hotelguestService.getHotelGuests().subscribe((hotelguests: HotelGuest[]) => {
+    this.hotelmanagementService.getHotelGuests().subscribe((hotelguests: HotelGuest[]) => {
       this.hotelguests = hotelguests;
     });
   }

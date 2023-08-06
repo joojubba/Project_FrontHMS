@@ -1,11 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Reservation } from 'src/app/models/Reservation';
 import { HotelGuest } from 'src/app/models/HotelGuest';
-import { ReservationService } from 'src/app/services/reservation.service';
-import { HotelguestService } from 'src/app/services/hotelguest.service';
 import { NgForm } from '@angular/forms';
-import { RoomService } from 'src/app/services/room.service';
 import { Room } from 'src/app/models/Room';
+import { HotelmanagementService } from 'src/app/services/hotelmanagement.service';
 
 
 @Component({
@@ -25,7 +23,7 @@ export class CheckinComponent {
   hotelguest = {} as HotelGuest;
   hotelguests: HotelGuest[] = [];
 
-  constructor( private reservationService: ReservationService, private roomService: RoomService, private hotelguestService: HotelguestService) {}
+  constructor( private hotelmanagementService: HotelmanagementService) {}
 
 
   ngOnInit() {
@@ -35,50 +33,50 @@ export class CheckinComponent {
   }
 
   saveCheckIn(roomNumber: number, reservationId: number) {
-    this.roomService.updateCheckIn(roomNumber, reservationId).subscribe(response => {
+    this.hotelmanagementService.updateCheckIn(roomNumber, reservationId).subscribe(response => {
       alert('Check-In realizado com sucesso!!')
     });
   }
 
   saveRoom(form: NgForm) {
     if (this.room.roomId !== undefined) {
-      this.roomService.updateRoom(this.room).subscribe(() => {
+      this.hotelmanagementService.updateRoom(this.room).subscribe(() => {
         this.cleanForm(form);
       });
     } else {
-      this.roomService.saveRoom(this.room).subscribe(() => {
+      this.hotelmanagementService.saveRoom(this.room).subscribe(() => {
         this.cleanForm(form);
       });
     }
   }
   saveReservation(form: NgForm) {
     if (this.reservation.reservationId !== undefined) {
-      this.reservationService.updateReservation(this.reservation).subscribe(() => {
+      this.hotelmanagementService.updateReservation(this.reservation).subscribe(() => {
         this.cleanForm(form);
       });
     } else {
-      this.reservationService.saveReservation(this.reservation).subscribe(() => {
+      this.hotelmanagementService.saveReservation(this.reservation).subscribe(() => {
         this.cleanForm(form);
       });
     }
   }
 
   getRooms() {
-    this.roomService.getRooms().subscribe((rooms: Room[]) => {
+    this.hotelmanagementService.getRooms().subscribe((rooms: Room[]) => {
       this.rooms = rooms;
       console.log(this.room);
 
     });
   }
   getReservations() {
-    this.reservationService.getReservations().subscribe((reservations: Reservation[]) => {
+    this.hotelmanagementService.getReservations().subscribe((reservations: Reservation[]) => {
       this.reservations = reservations;
       console.log(this.room);
 
     });
   }
   getHotelGuests() {
-    this.hotelguestService.getHotelGuests().subscribe((hotelguests: HotelGuest[]) => {
+    this.hotelmanagementService.getHotelGuests().subscribe((hotelguests: HotelGuest[]) => {
       this.hotelguests = hotelguests;
     });
   }

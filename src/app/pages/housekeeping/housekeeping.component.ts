@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Room } from 'src/app/models/Room';
 import { NgForm } from '@angular/forms';
-import { RoomService } from 'src/app/services/room.service';
 import { RoomStatus  } from 'src/app/models/Room';
+import { HotelmanagementService } from 'src/app/services/hotelmanagement.service';
 
 
 @Component({
@@ -14,8 +14,8 @@ export class HousekeepingComponent {
   room = {} as Room;
   rooms: Room[] = [];
 
-  constructor(private roomService: RoomService) {this.getRooms()}
-  //tentando string
+  constructor(private hotelmanagementService: HotelmanagementService) {this.getRooms()}
+
   roomStatus = RoomStatus;
 
   ngOnInit() {
@@ -23,23 +23,23 @@ export class HousekeepingComponent {
   }
 
   changeStatus(roomNumber: number, status: RoomStatus) {
-    this.roomService.updateRoomStatus(roomNumber, status).subscribe(response => {
+    this.hotelmanagementService.updateRoomStatus(roomNumber, status).subscribe(response => {
     });
   }
   saveRoom(form: NgForm) {
     if (this.room.roomId !== undefined) {
-      this.roomService.updateRoom(this.room).subscribe(() => {
+      this.hotelmanagementService.updateRoom(this.room).subscribe(() => {
         this.cleanForm(form);
       });
     } else {
-      this.roomService.saveRoom(this.room).subscribe(() => {
+      this.hotelmanagementService.saveRoom(this.room).subscribe(() => {
         this.cleanForm(form);
       });
     }
   }
 
   getRooms() {
-    this.roomService.getRooms().subscribe((reservations: Room[]) => {
+    this.hotelmanagementService.getRooms().subscribe((reservations: Room[]) => {
       this.rooms = reservations;
       console.log(this.room);
 
@@ -47,7 +47,7 @@ export class HousekeepingComponent {
   }
 
   deleteRoom(room: Room) {
-    this.roomService.deleteRoom(room).subscribe(() => {
+    this.hotelmanagementService.deleteRoom(room).subscribe(() => {
       this.getRooms();
     });
   }

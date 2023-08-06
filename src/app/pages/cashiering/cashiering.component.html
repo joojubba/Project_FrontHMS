@@ -8,3 +8,72 @@
     </tr>
     </tbody>
 </table>
+
+<div class="container">
+  <div class="card list-hotelguest">
+    <h5 class="card-header">Pagamentos Cadastrados</h5>
+    <div class="card-body">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Identificação</th>
+              <th scope="col">Valor R$</th>
+              <th scope="col">Forma de Pagamento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let payment of payments">
+              <td>{{payment.paymentId}}</td>
+              <td>{{hotelguest.hotelGuestName}}</td>
+              <td>{{hotelguest.hotelGuestIdentification}}</td>
+              <td>{{payment.paymentAmount}}</td>
+              <td>{{payment.paymentMethod}}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+<div class="card add-car">
+  <h5 class="card-header">Pagamento da Reserva</h5>
+  <div class="card-body">
+      <form id="add-form" (ngSubmit)="f.form.valid && saveReservation(f)" #f="ngForm" novalidate>
+        <div class="form-group">
+            <label for="model">Nome do Hóspede</label>
+            <input type="text" [(ngModel)]="hotelguest.hotelGuestName" id="hotelGuestName" name="hotelGuestName" #model="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+            <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                <div *ngIf="model.errors">Campo obrigatório!</div>
+            </div>
+            <label for="model">Identificação do Hóspode</label>
+            <input type="text" [(ngModel)]="hotelguest.hotelGuestId" id="hotelGuestIdentification" name="hotelGuestIdentification" #model="ngModel" class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+            <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                <div *ngIf="model.errors">Campo obrigatório!</div>
+            </div>
+            <label for="model">ID da Reserva</label>
+            <input type="number" [(ngModel)]="reservation.reservationId" id="reservationId" name="reservationId" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+            <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                <div *ngIf="model.errors">Campo obrigatório!</div>
+            </div>
+            <label for="model">Número do Quarto</label>
+            <input type="number" [(ngModel)]="room.roomNumber" id="roomNumber" name="roomNumber" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+            <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                <div *ngIf="model.errors">Campo obrigatório!</div>
+            </div>
+            <label for="model">Valor do Pagamento</label>
+            <input type="number" [(ngModel)]="payment.paymentAmount" id="paymentAmount" name="paymentAmount" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+            <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                <div *ngIf="model.errors">Campo obrigatório!</div>
+            </div>
+            <label for="model">Forma do Pagamento</label>
+            <input type="text" [(ngModel)]="payment.paymentMethod" id="paymentMethod" name="paymentMethod" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }">
+            <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
+                <div *ngIf="model.errors">Campo obrigatório!</div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-success btn-add-car" (click)="onSavePayment(reservation.reservationId, payment);cleanForm(f)">Pagar</button>
+        <button type="reset" class="btn btn-primary" (click)="cleanForm(f)">Cancelar</button>
+      </form>
+  </div>
+</div>
+

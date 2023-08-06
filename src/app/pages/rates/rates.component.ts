@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Rate } from 'src/app/models/Rate';
 import { NgForm } from '@angular/forms';
-import { RateService } from 'src/app/services/rate.service';
+import { HotelmanagementService } from 'src/app/services/hotelmanagement.service';
 
 @Component({
   selector: 'app-rates',
@@ -13,31 +13,31 @@ export class RatesComponent {
   rate = {} as Rate;
   rates: Rate[] = [];
 
-  constructor(private rateService: RateService) {}
+  constructor(private hotelmanagementService: HotelmanagementService) {}
 
   ngOnInit() {
     this.getRates();
   }
   saveRate(form: NgForm) {
     if (this.rate.rateId !== undefined) {
-      this.rateService.updateRate(this.rate).subscribe(() => {
+      this.hotelmanagementService.updateRate(this.rate).subscribe(() => {
         this.cleanForm(form);
       });
     } else {
-      this.rateService.saveRate(this.rate).subscribe(() => {
+      this.hotelmanagementService.saveRate(this.rate).subscribe(() => {
         this.cleanForm(form);
       });
     }
   }
 
   getRates() {
-    this.rateService.getRates().subscribe((rates: Rate[]) => {
+    this.hotelmanagementService.getRates().subscribe((rates: Rate[]) => {
       this.rates = rates;
     });
   }
 
   deleteRate(rate: Rate) {
-    this.rateService.deleteRate(rate).subscribe(() => {
+    this.hotelmanagementService.deleteRate(rate).subscribe(() => {
       this.getRates();
     });
   }

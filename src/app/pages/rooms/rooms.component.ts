@@ -1,8 +1,7 @@
 import { Component} from '@angular/core';
-import { FormGroup,FormControl  } from '@angular/forms';
 import { Room } from 'src/app/models/Room';
 import { NgForm } from '@angular/forms';
-import { RoomService } from 'src/app/services/room.service';
+import { HotelmanagementService } from 'src/app/services/hotelmanagement.service';
 
 
 @Component({
@@ -14,25 +13,25 @@ export class RoomsComponent{
   room = {} as Room;
   rooms: Room[] = [];
 
-  constructor(private roomService: RoomService) {this.getRooms()}
+  constructor(private hotelmanagementService: HotelmanagementService) {this.getRooms()}
 
   ngOnInit() {
     this.getRooms();
   }
   saveRoom(form: NgForm) {
     if (this.room.roomId !== undefined) {
-      this.roomService.updateRoom(this.room).subscribe(() => {
+      this.hotelmanagementService.updateRoom(this.room).subscribe(() => {
         this.cleanForm(form);
       });
     } else {
-      this.roomService.saveRoom(this.room).subscribe(() => {
+      this.hotelmanagementService.saveRoom(this.room).subscribe(() => {
         this.cleanForm(form);
       });
     }
   }
 
   getRooms() {
-    this.roomService.getRooms().subscribe((rooms: Room[]) => {
+    this.hotelmanagementService.getRooms().subscribe((rooms: Room[]) => {
       this.rooms = rooms;
       console.log(this.room);
 
@@ -40,7 +39,7 @@ export class RoomsComponent{
   }
 
   deleteRoom(room: Room) {
-    this.roomService.deleteRoom(room).subscribe(() => {
+    this.hotelmanagementService.deleteRoom(room).subscribe(() => {
       this.getRooms();
     });
   }
